@@ -1,0 +1,70 @@
+<header>
+  <!-- Top Bar -->
+  <div class="top-bar">
+    <div class="top-bar-content">
+      <span class="top-bar-title">JUDICIAL COUNCIL OF CALIFORNIA</span>
+      <nav class="top-bar-nav">
+        <a href="#" class="top-nav-link">Supreme Court</a>
+        <a href="#" class="top-nav-link">Courts of Appeal</a>
+        <a href="#" class="top-nav-link">Superior Courts</a>
+        <a href="#" class="top-nav-link">Judicial Council</a>
+      </nav>
+    </div>
+  </div>
+
+  <!-- Main Header -->
+  <div class="main-header">
+    <div class="main-header-content">
+      <!-- Logo and Title Section -->
+      <div class="logo-section">
+        <img src="court-seal.svg" alt="Court Seal" class="court-seal" />
+        <div class="court-title">
+          <div class="court-name">SUPERIOR COURT OF CALIFORNIA</div>
+          <div class="county-name">COUNTY OF ORANGE</div>
+        </div>
+      </div>
+
+      <!-- Right Section: Language Selector and Search -->
+      <div class="header-right">
+        <div class="translate-section">
+          <select class="language-selector">
+            <option value="">Select Language</option>
+            <option value="es">Spanish</option>
+            <option value="vi">Vietnamese</option>
+            <option value="ko">Korean</option>
+            <option value="zh">Chinese</option>
+          </select>
+          <span class="powered-by">Powered by <span class="google-translate">Google Translate</span></span>
+        </div>
+
+        <div class="search-box">
+          <input 
+            type="text" 
+            [(ngModel)]="searchQuery" 
+            placeholder="Search" 
+            class="search-input"
+            (keyup.enter)="onSearch()"
+          />
+          <button class="search-button" (click)="onSearch()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8"></circle>
+              <path d="m21 21-4.35-4.35"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navigation Bar -->
+  <nav class="main-nav">
+    <div class="main-nav-content">
+      <a href="#" class="nav-link">Home</a>
+      <a href="#" class="nav-link">Online Services <span class="arrow">▼</span></a>
+      <a href="#" class="nav-link">Forms & Filing <span class="arrow">▼</span></a>
+      <a href="#" class="nav-link">Self Help <span class="arrow">▼</span></a>
+      <a href="#" class="nav-link">Divisions <span class="arrow">▼</span></a>
+      <a href="#" class="nav-link">General Information <span class="arrow">▼</span></a>
+    </div>
+  </nav>
+</header>
