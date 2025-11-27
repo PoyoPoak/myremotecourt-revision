@@ -1,0 +1,7 @@
+<Solution>
+  <Project Path="myremotecourt.client/myremotecourt.client.esproj">
+    <Build />
+    <Deploy />
+  </Project>
+  <Project Path="MyRemoteCourt.Server/MyRemoteCourt.Server.csproj" />
+</Solution>
