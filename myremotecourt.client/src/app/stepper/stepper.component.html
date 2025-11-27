@@ -1,0 +1,36 @@
+<div class="stepper-container">
+  <div class="stepper-header">
+    <div *ngFor="let step of steps; let i = index" class="step-wrapper">
+      <div class="step-item"
+           [class.active]="isStepActive(i)"
+           [class.completed]="isStepCompleted(i)"
+           [class.clickable]="canGoToStep(i)"
+           (click)="canGoToStep(i) && goToStep(i)">
+        <div class="step-circle">
+          <span *ngIf="!isStepCompleted(i)">{{ i + 1 }}</span>
+          <span *ngIf="isStepCompleted(i)" class="checkmark">✓</span>
+        </div>
+        <div class="step-label">{{ step.label }}</div>
+      </div>
+      <div *ngIf="i < steps.length - 1" class="step-connector"
+           [class.completed]="isStepCompleted(i)"></div>
+    </div>
+  </div>
+
+  <div class="stepper-content">
+    <ng-content></ng-content>
+  </div>
+
+  <div class="stepper-actions">
+    <button class="btn btn-secondary"
+            (click)="previousStep()"
+            [disabled]="currentStep === 0">
+      Previous
+    </button>
+    <button class="btn btn-primary"
+            (click)="nextStep()"
+            [disabled]="currentStep === steps.length - 1">
+      Next
+    </button>
+  </div>
+</div>

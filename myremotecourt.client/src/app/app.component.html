@@ -1,5 +1,23 @@
 <app-header></app-header>
 
 <div class="main-content">
-  hello
+  <app-stepper [steps]="steps" [currentStep]="currentStep" (stepChange)="onStepChange($event)">
+    <div [ngSwitch]="currentStep">
+      <div *ngSwitchCase="0">
+        <h2>Step 1: Personal Information</h2>
+        <p>Enter your personal details here.</p>
+      </div>
+      <div *ngSwitchCase="1">
+        <h2>Step 2: Case Details</h2>
+        <p>Provide information about your case.</p>
+      </div>
+      <div *ngSwitchCase="2">
+        <h2>Step 3: Review</h2>
+        <p>Review your submission before finalizing.</p>
+      </div>
+      <div *ngSwitchDefault>
+        <p>Unknown step</p>
+      </div>
+    </div>
+  </app-stepper>
 </div>
