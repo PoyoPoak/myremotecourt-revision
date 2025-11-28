@@ -1,23 +1,193 @@
 <app-header></app-header>
 
 <div class="main-content">
-  <app-stepper [steps]="steps" [currentStep]="currentStep" (stepChange)="onStepChange($event)">
-    <div [ngSwitch]="currentStep">
-      <div *ngSwitchCase="0">
-        <h2>Step 1: Personal Information</h2>
-        <p>Enter your personal details here.</p>
+  <!-- Breadcrumb -->
+  <div class="breadcrumb">
+    <a href="#general-info">General Information</a> / <span>Remote Appearance Information</span>
+  </div>
+
+  <!-- Page Title -->
+  <div class="page-title">
+    <h1>Remote Appearance</h1>
+  </div>
+
+  <!-- Main Content Section -->
+  <section class="content-section">
+    <div class="intro-text">
+      <p>
+        The Orange County Superior Court offers the opportunity to appear remotely in various case types. 
+        To locate information regarding available options, select the applicable case type link below. 
+        The public is encouraged to take advantage of remote appearance opportunities to reduce travel time, 
+        parking cost and potential hearing delays.
+      </p>
+      <p>
+        Members of the public should also check the Local Rules of Court posted on the court's website as 
+        well as department rules, if available, for additional details.
+      </p>
+    </div>
+
+    <!-- Remote Appearance Table -->
+    <div class="table-container">
+      <table class="remote-appearance-table">
+        <thead>
+          <tr>
+            <th>Case Type</th>
+            <th>Click Here For Details</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Appellate Division</td>
+            <td>
+              <a href="#appeals">Appeals & Records</a><br />
+              <a href="#appellate-procedure">Appearance Procedure and Information - Appellate Division</a>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Civil:<br />
+              Evictions/Unlawful Detainers<br />
+              Restraining Orders (Civil)<br />
+              Administrative Appeals<br />
+              Name Change (Civil)
+            </td>
+            <td>
+              <a href="#civil-video">Civil Remote Hearings - Video Appearance</a><br />
+              <a href="#evictions-procedure">Appearance Procedure and Information - Evictions</a><br />
+              <a href="#restraining-procedure">Appearance Procedure and Information - Restraining Orders</a><br />
+              <a href="#admin-appeals">Appearance Procedure and Information - Administrative Appeals</a>
+            </td>
+          </tr>
+          <tr>
+            <td>Civil Limited</td>
+            <td>
+              <a href="#civil-limited-video">Civil Remote Hearings - Video Appearance</a><br />
+              <a href="#civil-limited-procedure">Appearance Procedure and Information - Limited Civil</a>
+            </td>
+          </tr>
+          <tr>
+            <td>Civil Unlimited and Complex</td>
+            <td>
+              <a href="#civil-unlimited-video">Civil Remote Hearings - Video Appearance</a><br />
+              <a href="#civil-unlimited-procedure">Appearance Procedure and Information - Civil Unlimited/Complex</a>
+            </td>
+          </tr>
+          <tr>
+            <td>Civil - Small Claims</td>
+            <td>
+              <a href="#small-claims-video">Small Claims Remote Hearings - Video Appearance</a><br />
+              <a href="#small-claims-procedure">Appearance Procedure and Information - Small Claims</a><br />
+              <a href="#small-claims-instructions">Small Claims Remote Hearing Instructions: Small Claims</a>
+            </td>
+          </tr>
+          <tr>
+            <td>Criminal</td>
+            <td>
+              In general, criminal hearings held in Dept. C11 and remote appearances approved by the court room. 
+              Contact the assigned court clerk to request a remote appearance.
+            </td>
+          </tr>
+          <tr>
+            <td>Dependent Adult Abuse</td>
+            <td>
+              <a href="#probate-mental-health-video">Probate & Mental Health - Video Appearance</a>
+            </td>
+          </tr>
+          <tr>
+            <td>Family Law</td>
+            <td>
+              <a href="#family-law">Family Law</a>
+            </td>
+          </tr>
+          <tr>
+            <td>Juvenile Court</td>
+            <td>
+              Juvenile Court hearings are conducted with in-person appearances by parties, attorneys, and other 
+              persons entitled to be present unless otherwise approved by the Juvenile Court Judge.<br />
+              Juvenile Court does not broadcast or livestream any proceeding for remote public viewing.
+            </td>
+          </tr>
+          <tr>
+            <td>Juvenile Court Traffic</td>
+            <td>
+              Juvenile traffic arraignments are scheduled as remote appearances.<br />
+              Juvenile traffic court trials are scheduled as in-person appearances.
+            </td>
+          </tr>
+          <tr>
+            <td>Probate/Mental Health</td>
+            <td>
+              <a href="#probate-mental-health-video-2">Probate & Mental Health - Video Appearance</a><br />
+              <a href="#probate-procedure">Appearance Procedure and Information - Probate/Mental Health</a>
+            </td>
+          </tr>
+          <tr>
+            <td>Traffic</td>
+            <td>
+              Traffic arraignments are scheduled as remote appearances. Click below for instructions and to 
+              access the link to appear remotely:<br />
+              <a href="#traffic-remote">Traffic Remote Appearance Information</a><br />
+              Traffic court trials are scheduled as in-person appearances.
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Footer Navigation -->
+  <footer class="page-footer">
+    <div class="footer-columns">
+      <div class="footer-column">
+        <h3>Administrative</h3>
+        <ul>
+          <li><a href="#ada">ADA</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li><a href="#employment">Employment</a></li>
+        </ul>
       </div>
-      <div *ngSwitchCase="1">
-        <h2>Step 2: Case Details</h2>
-        <p>Provide information about your case.</p>
+      <div class="footer-column">
+        <h3>Attorney Resources</h3>
+        <ul>
+          <li><a href="#calendars">Court Calendars</a></li>
+          <li><a href="#forms">Forms</a></li>
+          <li><a href="#rules">Rules of Court</a></li>
+        </ul>
       </div>
-      <div *ngSwitchCase="2">
-        <h2>Step 3: Review</h2>
-        <p>Review your submission before finalizing.</p>
+      <div class="footer-column">
+        <h3>California Court</h3>
+        <ul>
+          <li><a href="#self-help-center">CA Courts Self-Help Center</a></li>
+          <li><a href="#judicial-council">Judicial Council</a></li>
+        </ul>
       </div>
-      <div *ngSwitchDefault>
-        <p>Unknown step</p>
+      <div class="footer-column">
+        <h3>Public Resources</h3>
+        <ul>
+          <li><a href="#court-holidays">Court Holidays</a></li>
+          <li><a href="#privacy">Privacy Policy</a></li>
+          <li><a href="#tentative-rulings">Tentative Rulings</a></li>
+          <li><a href="#terms">Terms and Conditions</a></li>
+        </ul>
       </div>
     </div>
-  </app-stepper>
+
+    <div class="footer-bottom">
+      <div class="footer-title">
+        <h2>SUPERIOR COURT OF CALIFORNIA</h2>
+        <h3>COUNTY OF ORANGE</h3>
+      </div>
+      <div class="footer-links">
+        <a href="#privacy-policy">Privacy Policy</a> |
+        <a href="#terms-of-use">Terms of Use</a> |
+        <span>© 2025</span>
+      </div>
+      <div class="rss-feed">
+        <a href="#rss">📡</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Placeholder note for future LLM chat window -->
+  <!-- LLM Chat Window will be added in bottom right corner in future iteration -->
 </div>
