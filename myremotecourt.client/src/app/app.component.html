@@ -15,14 +15,158 @@
   <section class="content-section">
     <div class="intro-text">
       <p>
-        The Orange County Superior Court offers the opportunity to appear remotely in various case types. 
-        To locate information regarding available options, select the applicable case type link below. 
-        The public is encouraged to take advantage of remote appearance opportunities to reduce travel time, 
+        The Orange County Superior Court offers the opportunity to appear remotely in various case types.
+
+        The public is encouraged to take advantage of remote appearance opportunities to reduce travel time,
         parking cost and potential hearing delays.
       </p>
       <p>
-        Members of the public should also check the Local Rules of Court posted on the court's website as 
+        Please verify your remote appearance eligibility by following the eligibility wizard below or by calling.
+      </p>
+    </div>
+
+    <!-- Eligibility Wizard Stepper -->
+    <div class="eligibility-wizard">
+      <h2>Remote Appearance Eligibility Wizard</h2>
+      
+      <app-stepper [steps]="steps" [currentStep]="currentStep" (stepChange)="onStepChange($event)">
+        <div [ngSwitch]="currentStep">
+          <!-- Step 1: Enter Case Number -->
+          <div *ngSwitchCase="0" class="step-content">
+            <h3>Step 1: Enter Your Case/Citation Number</h3>
+            <p>Please enter your case or citation number to look up your hearing information.</p>
+            
+            <div class="form-group">
+              <label for="caseNumber">Case/Citation Number:</label>
+              <input 
+                type="text" 
+                id="caseNumber" 
+                [(ngModel)]="caseNumber" 
+                placeholder="e.g., 12345678"
+                class="form-input"
+                (keyup.enter)="searchCase()"
+              />
+            </div>
+            
+            <button class="btn btn-primary" (click)="searchCase()" [disabled]="!caseNumber.trim()">
+              Search Case
+            </button>
+          </div>
+
+          <!-- Step 2: Verify Case Details -->
+          <div *ngSwitchCase="1" class="step-content">
+            <h3>Step 2: Verify Your Case Details</h3>
+            <p>Please confirm this is your case:</p>
+            
+            <div class="case-details-card" *ngIf="caseData">
+              <div class="detail-row">
+                <span class="detail-label">Case Number:</span>
+                <span class="detail-value">{{ caseData.caseNumber }}</span>
+              </div>
+              <div class="detail-row">
+                <span class="detail-label">Defendant:</span>
+                <span class="detail-value">{{ caseData.defendant }}</span>
+              </div>
+              <div class="detail-row">
+                <span class="detail-label">Case Type:</span>
+                <span class="detail-value">{{ caseData.caseType }}</span>
+              </div>
+              <div class="detail-row">
+                <span class="detail-label">Hearing Type:</span>
+                <span class="detail-value">{{ caseData.hearingType }}</span>
+              </div>
+              <div class="detail-row">
+                <span class="detail-label">Hearing Date:</span>
+                <span class="detail-value">{{ caseData.hearingDate }}</span>
+              </div>
+              <div class="detail-row">
+                <span class="detail-label">Location:</span>
+                <span class="detail-value">{{ caseData.location }}</span>
+              </div>
+            </div>
+            
+            <div class="confirmation-buttons">
+              <button class="btn btn-success" (click)="confirmCase(true)">
+                Yes, This is My Case
+              </button>
+              <button class="btn btn-secondary" (click)="confirmCase(false)">
+                No, Search Again
+              </button>
+            </div>
+          </div>
+
+          <!-- Step 3: Eligibility Result -->
+          <div *ngSwitchCase="2" class="step-content">
+            <div *ngIf="isEligible === true" class="eligibility-result eligible">
+              <div class="result-icon eligible-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <path d="M9 12l2 2 4-4"></path>
+                </svg>
+              </div>
+              <h3 class="result-headline">You are Eligible for Remote Appearance</h3>
+              <div class="result-explanation">
+                <p>
+                  Your hearing is a <strong>{{ caseData?.hearingType }}</strong>. 
+                  According to California Code of Civil Procedure Section 367.5 and California Rules of Court, 
+                  Rule 3.672, you are allowed to attend this hearing remotely via video appearance.
+                </p>
+                <p>
+                  Remote appearances help reduce travel time, parking costs, and potential delays while 
+                  ensuring you can participate fully in your court proceedings.
+                </p>
+              </div>
+              <button class="btn btn-primary btn-lg" (click)="requestRemoteAppearance()">
+                Request Remote Appearance
+              </button>
+            </div>
+
+            <div *ngIf="isEligible === false" class="eligibility-result ineligible">
+              <div class="result-icon ineligible-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <line x1="12" y1="8" x2="12" y2="12"></line>
+                  <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                </svg>
+              </div>
+              <h3 class="result-headline">In-Person Appearance Required</h3>
+              <div class="result-explanation">
+                <p>
+                  Your hearing is a <strong>{{ caseData?.hearingType }}</strong>. 
+                  For this type of hearing, you must appear physically at the court location.
+                </p>
+                <p>
+                  Court trials require in-person attendance to ensure proper confrontation rights and 
+                  the presentation of evidence. You must appear at the {{ caseData?.location }} on your 
+                  scheduled hearing date: <strong>{{ caseData?.hearingDate }}</strong>.
+                </p>
+                <p>
+                  Please arrive at least 30 minutes early and bring a valid photo ID.
+                </p>
+              </div>
+              <button class="btn btn-primary btn-lg" (click)="getDirections()">
+                Get Directions
+              </button>
+              <button class="btn btn-secondary" (click)="resetSearch()" style="margin-left: 1rem;">
+                Check Another Case
+              </button>
+            </div>
+          </div>
+
+          <div *ngSwitchDefault>
+            <p>Unknown step</p>
+          </div>
+        </div>
+      </app-stepper>
+    </div>
+
+    <div>
+      <p>
+        Members of the public should also check the Local Rules of Court posted on the court's website as
         well as department rules, if available, for additional details.
+      </p>
+      <p>
+        To locate information regarding available options, select the applicable case type link below.
       </p>
     </div>
 
@@ -183,7 +327,7 @@
         <span>© 2025</span>
       </div>
       <div class="rss-feed">
-        <a href="#rss">📡</a>
+        <a href="#rss">📡 RSS</a>
       </div>
     </div>
   </footer>

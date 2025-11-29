@@ -12,106 +12,11 @@
   color: #333;
 }
 
-/* Header Section */
-.page-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem 2rem;
-  background-color: #f8f8f8;
-  border-bottom: 3px solid #003366;
-}
-
-.court-seal img {
-  width: 80px;
-  height: 80px;
-}
-
-.court-title h1 {
-  font-size: 1rem;
-  margin: 0;
-  color: #003366;
-  font-weight: bold;
-}
-
-.court-title h2 {
-  font-size: 1.2rem;
-  margin: 0.25rem 0 0 0;
-  color: #003366;
-  font-weight: bold;
-}
-
-.header-controls {
-  display: flex;
-  gap: 1rem;
-  align-items: center;
-}
-
-.language-selector {
-  padding: 0.5rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-.search-box {
-  display: flex;
-  gap: 0.25rem;
-}
-
-.search-box input {
-  padding: 0.5rem;
-  border: 1px solid #ccc;
-  border-radius: 4px 0 0 4px;
-  min-width: 200px;
-}
-
-.search-box button {
-  padding: 0.5rem 1rem;
-  background-color: #fff;
-  border: 1px solid #ccc;
-  border-left: none;
-  border-radius: 0 4px 4px 0;
-  cursor: pointer;
-}
-
-/* Navigation Bar */
-.main-navigation {
-  background-color: #003366;
-  padding: 0;
-}
-
-.main-navigation ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  justify-content: center;
-}
-
-.main-navigation li {
-  position: relative;
-}
-
-.main-navigation a {
-  display: block;
-  color: white;
-  text-decoration: none;
-  padding: 1rem 1.5rem;
-  transition: background-color 0.3s;
-}
-
-.main-navigation a:hover,
-.main-navigation a.active {
-  background-color: #005599;
-}
-
 /* Breadcrumb */
 .breadcrumb {
-/*  background-color: #f0f0f0;*/
+  background-color: #f0f0f0;
   font-size: 0.9rem;
-  padding: 0.5rem;
-  max-width: 1280px;
-  margin: 0 auto;
+  padding: 0.5rem 0;
   color: #666;
 }
 
@@ -132,7 +37,6 @@
 
 /* Page Title */
 .page-title {
-  background-color: #f0f0f0;
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem 2rem 1rem 2rem;
@@ -171,6 +75,214 @@
 
 .intro-text p {
   margin-bottom: 1rem;
+}
+
+/* Eligibility Wizard */
+.eligibility-wizard {
+  background-color: #f8f9fa;
+  border: 2px solid #0066cc;
+  border-radius: 8px;
+  padding: 2rem;
+  margin: 2rem 0 3rem 0;
+}
+
+.eligibility-wizard h2 {
+  color: #0066cc;
+  font-size: 1.5rem;
+  margin: 0 0 1.5rem 0;
+  text-align: center;
+}
+
+/* Step Content */
+.step-content {
+  padding: 2rem;
+  min-height: 300px;
+}
+
+.step-content h3 {
+  color: #2c3e50;
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+}
+
+.step-content p {
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+
+/* Form Elements */
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.form-input {
+  width: 100%;
+  max-width: 400px;
+  padding: 0.75rem;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+  transition: border-color 0.3s;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: #0066cc;
+}
+
+/* Buttons */
+.btn {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.1s;
+}
+
+.btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-primary {
+  background-color: #0066cc;
+  color: white;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background-color: #0052a3;
+}
+
+.btn-secondary {
+  background-color: #6c757d;
+  color: white;
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background-color: #5a6268;
+}
+
+.btn-success {
+  background-color: #28a745;
+  color: white;
+}
+
+.btn-success:hover:not(:disabled) {
+  background-color: #218838;
+}
+
+.btn-lg {
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+}
+
+/* Case Details Card */
+.case-details-card {
+  background-color: white;
+  border: 2px solid #0066cc;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.detail-row {
+  display: flex;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.detail-row:last-child {
+  border-bottom: none;
+}
+
+.detail-label {
+  font-weight: 600;
+  color: #555;
+  min-width: 150px;
+}
+
+.detail-value {
+  color: #333;
+}
+
+/* Confirmation Buttons */
+.confirmation-buttons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+/* Eligibility Result */
+.eligibility-result {
+  text-align: center;
+  padding: 2rem;
+}
+
+.result-icon {
+  margin: 0 auto 1.5rem auto;
+}
+
+.eligible-icon {
+  color: #28a745;
+}
+
+.ineligible-icon {
+  color: #ffc107;
+}
+
+.result-headline {
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+}
+
+.eligible .result-headline {
+  color: #28a745;
+}
+
+.ineligible .result-headline {
+  color: #856404;
+}
+
+.result-explanation {
+  background-color: white;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  text-align: left;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.eligible .result-explanation {
+  border: 2px solid #28a745;
+}
+
+.ineligible .result-explanation {
+  border: 2px solid #ffc107;
+}
+
+.result-explanation p {
+  margin-bottom: 1rem;
+  line-height: 1.6;
+}
+
+.result-explanation p:last-child {
+  margin-bottom: 0;
 }
 
 /* Table Styles */
@@ -305,15 +417,6 @@
 
 /* Responsive Design */
 @media (max-width: 768px) {
-  .page-header {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .main-navigation ul {
-    flex-direction: column;
-  }
-
   .footer-columns {
     grid-template-columns: 1fr;
   }
@@ -321,5 +424,13 @@
   .footer-bottom {
     flex-direction: column;
     gap: 1rem;
+  }
+
+  .confirmation-buttons {
+    flex-direction: column;
+  }
+
+  .form-input {
+    max-width: 100%;
   }
 }
