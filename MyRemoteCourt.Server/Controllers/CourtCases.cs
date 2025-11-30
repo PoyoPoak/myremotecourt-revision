@@ -21,17 +21,24 @@ namespace MyRemoteCourt.Server.Controllers
         // GET: api/courtcases/{caseNumber}
         // Returns a court case with computed RemoteApproved status
         [HttpGet("{caseNumber}")]
-        public async Task<ActionResult<CourtCase>> GetCasebyCaseNumber(string caseNumber)
+        public async Task<ActionResult<CourtCase>> GetCasebyCaseNumber(string caseNumber, [FromQuery]
         {
             // IMPORTANT: Must include RemoteRequest for RemoteApproved to compute correctly
             var courtCase = await _dbManager.CourtCase
-                .Include(c => c.RemoteRequest)  // Load related RemoteRequest
+                .Include(c => c.RemoteRequest)
                 .FirstOrDefaultAsync(c => c.CaseNumber == caseNumber);
 
             // Check if found
             if (courtCase == null)
             {
                 return NotFound(new { message = $"Information regarding case/citation number {caseNumber} not found." });
+            }
+
+            // Check last name parameter
+            if (!HttpContext.Request.Query.TryGetValue("lastName", out var lastName) ||
+                !string.Equals(courtCase.LastName, lastName.ToString(), StringComparison.OrdinalIgnoreCase))
+            {
+                return Unauthorized(new { message = "Last name does not match our records." });
             }
 
             CourtCaseDTO response = new CourtCaseDTO
