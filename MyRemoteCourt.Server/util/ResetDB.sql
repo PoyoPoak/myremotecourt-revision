@@ -16,7 +16,12 @@ CREATE TABLE dbo.CourtCase (
     LastName VARCHAR(100) NOT NULL,
     CaseType VARCHAR(50) NULL,
     AssignedCourtroom VARCHAR(50) NOT NULL,
-    QueuePlacement INT NULL
+    QueuePlacement INT NULL,
+    Defendant VARCHAR(200) NULL,
+    Plaintiff VARCHAR(200) NULL,
+    HearingType VARCHAR(100) NULL,
+    HearingDate VARCHAR(50) NULL,
+    Location VARCHAR(200) NULL
 );
 GO
 
@@ -43,14 +48,14 @@ GO
 SET IDENTITY_INSERT dbo.CourtCase ON;
 
 -- Insert sample cases
-INSERT INTO dbo.CourtCase (Id, CaseNumber, FirstName, LastName, CaseType, AssignedCourtroom, QueuePlacement)
+INSERT INTO dbo.CourtCase (Id, CaseNumber, FirstName, LastName, CaseType, AssignedCourtroom, QueuePlacement, Defendant, Plaintiff, HearingType, HearingDate, Location)
 VALUES 
-(1, 'CR-2023-001', 'John', 'Doe', 'Criminal', 'Room 302', NULL), -- No remote request
-(2, 'CV-2023-045', 'Jane', 'Smith', 'Civil', 'Room 101', NULL), -- No remote request
-(3, 'TR-2023-999', 'Robert', 'Brown', 'Traffic', 'Room 200', NULL), -- Request denied
-(4, 'CR-2023-002', 'Maria', 'Garcia', 'Criminal', 'Room 305', NULL), -- Request denied
-(5, 'CV-2023-046', 'Michael', 'Johnson', 'Civil', 'Room 102', 2), -- Request approved
-(6, 'TR-2024-001', 'Sarah', 'Williams', 'Traffic', 'Room 201', 1); -- Request approved
+(1, 'CR-3498-001', 'John', 'Doe', 'Criminal', 'Room 302', NULL, 'John Doe', 'State of California', 'Preliminary Hearing', '2025-02-10', 'Orange County Justice Center'),
+(2, 'CV-4722-045', 'Jane', 'Smith', 'Civil', 'Room 101', NULL, 'Jane Smith', 'ABC Corporation', 'Motion Hearing', '2025-02-12', 'Orange County Justice Center'),
+(3, 'TR-3497-999', 'Robert', 'Brown', 'Traffic', 'Room 200', NULL, 'Robert Brown', 'State of California', 'Traffic Arraignment', '2025-02-15', 'Orange County Justice Center'),
+(4, 'CR-0923-002', 'Maria', 'Garcia', 'Criminal', 'Room 305', NULL, 'Maria Garcia', 'State of California', 'Court Trial', '2025-02-18', 'Orange County Justice Center'),
+(5, 'CV-1120-046', 'Michael', 'Johnson', 'Civil', 'Room 102', 2, 'Michael Johnson', 'XYZ Company', 'Traffic Arraignment', '2025-02-20', 'Orange County Justice Center'),
+(6, 'TR-9238-001', 'Sarah', 'Williams', 'Traffic', 'Room 201', 1, 'Sarah Williams', 'State of California', 'Traffic Arraignment', '2025-02-22', 'Orange County Justice Center');
 
 SET IDENTITY_INSERT dbo.CourtCase OFF;
 GO
@@ -101,6 +106,11 @@ SELECT
     c.CaseNumber,
     c.FirstName + ' ' + c.LastName AS FullName,
     c.CaseType,
+    c.Defendant,
+    c.Plaintiff,
+    c.HearingType,
+    c.HearingDate,
+    c.Location,
     CASE 
         WHEN r.Approved = 1 THEN 1 
         ELSE 0 

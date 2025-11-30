@@ -18,6 +18,12 @@ namespace MyRemoteCourt.Server.Models
         public string AssignedCourtroom { get; set; } = string.Empty;
         public int? QueuePlacement { get; set; }
         
+        public string? Defendant { get; set; }
+        public string? Plaintiff { get; set; }
+        public string? HearingType { get; set; }
+        public string? HearingDate { get; set; }
+        public string? Location { get; set; }
+        
         // Navigation property for one-to-one relationship with RemoteRequest
         public RemoteRequest? RemoteRequest { get; set; }
     }

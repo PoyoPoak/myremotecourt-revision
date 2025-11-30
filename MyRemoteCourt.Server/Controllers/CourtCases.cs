@@ -39,7 +39,12 @@ namespace MyRemoteCourt.Server.Controllers
                 CaseNumber = courtCase.CaseNumber,
                 FirstName = courtCase.FirstName,
                 LastName = courtCase.LastName,
-                CaseType = courtCase.CaseType
+                CaseType = courtCase.CaseType,
+                Defendant = courtCase.Defendant,
+                Plaintiff = courtCase.Plaintiff,
+                HearingType = courtCase.HearingType,
+                HearingDate = courtCase.HearingDate,
+                Location = courtCase.Location
             };
 
             return Ok(response);

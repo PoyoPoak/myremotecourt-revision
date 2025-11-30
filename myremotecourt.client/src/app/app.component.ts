@@ -3,11 +3,13 @@ import { Step } from './stepper/stepper.component';
 
 interface CaseData {
   caseNumber: string;
+  fullName: string;
   caseType: string;
-  hearingDate: string;
-  hearingType: string;
-  location: string;
   defendant: string;
+  plaintiff: string;
+  hearingType: string;
+  hearingDate: string;
+  location: string;
 }
 
 @Component({
@@ -51,11 +53,13 @@ export class AppComponent {
       // Mock case data
       this.caseData = {
         caseNumber: this.caseNumber,
+        fullName: 'John Doe',
         caseType: 'Traffic',
+        defendant: 'John Doe',
+        plaintiff: 'State of California',
+        hearingType: 'Traffic Arraignment',
         hearingDate: '2025-02-15',
-        hearingType: 'Traffic Arraignment', // or 'Court Trial'
-        location: 'Orange County Justice Center',
-        defendant: 'John Doe'
+        location: 'Orange County Justice Center'
       };
       this.steps[0].completed = true;
       this.currentStep = 1;
@@ -102,7 +106,9 @@ export class AppComponent {
 
   getDirections(): void {
     // Open Google Maps to the court location
-    const address = encodeURIComponent('Orange County Justice Center, Santa Ana, CA');
-    window.open(`https://www.google.com/maps/search/?api=1&query=${address}`, '_blank');
+    if (this.caseData?.location) {
+      const address = encodeURIComponent(this.caseData.location);
+      window.open(`https://www.google.com/maps/search/?api=1&query=${address}`, '_blank');
+    }
   }
 }
