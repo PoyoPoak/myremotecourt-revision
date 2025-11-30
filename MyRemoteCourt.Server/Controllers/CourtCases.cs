@@ -40,8 +40,6 @@ namespace MyRemoteCourt.Server.Controllers
                 FirstName = courtCase.FirstName,
                 LastName = courtCase.LastName,
                 CaseType = courtCase.CaseType,
-                Defendant = courtCase.Defendant,
-                Plaintiff = courtCase.Plaintiff,
                 HearingType = courtCase.HearingType,
                 HearingDate = courtCase.HearingDate,
                 Location = courtCase.Location

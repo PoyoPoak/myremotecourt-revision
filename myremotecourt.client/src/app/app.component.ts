@@ -5,8 +5,6 @@ interface CaseData {
   caseNumber: string;
   fullName: string;
   caseType: string;
-  defendant: string;
-  plaintiff: string;
   hearingType: string;
   hearingDate: string;
   location: string;
@@ -56,8 +54,6 @@ export class AppComponent {
         caseNumber: this.caseNumber,
         fullName: 'John Doe',
         caseType: 'Traffic',
-        defendant: 'John Doe',
-        plaintiff: 'State of California',
         hearingType: 'Traffic Arraignment',
         hearingDate: '2025-02-15',
         location: 'Orange County Justice Center'
