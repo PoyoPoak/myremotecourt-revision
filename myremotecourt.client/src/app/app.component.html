@@ -35,8 +35,8 @@
         <div [ngSwitch]="currentStep">
           <!-- Step 1: Enter Case Number -->
           <div *ngSwitchCase="0" class="step-content">
-            <h3>Step 1: Enter Your Case/Citation Number</h3>
-            <p>Please enter your case or citation number to look up your hearing information.</p>
+            <h3>Step 1: Enter Your Case/Citation Number and Last Name</h3>
+            <p>Please enter your case or citation number and last name to look up your hearing information.</p>
             
             <div class="form-group">
               <label for="caseNumber">Case/Citation Number:</label>
@@ -44,13 +44,25 @@
                 type="text" 
                 id="caseNumber" 
                 [(ngModel)]="caseNumber" 
-                placeholder="e.g., 12345678"
+                placeholder="e.g., TR-3497-999"
                 class="form-input"
                 (keyup.enter)="searchCase()"
               />
             </div>
             
-            <button class="btn btn-primary" (click)="searchCase()" [disabled]="!caseNumber.trim()">
+            <div class="form-group">
+              <label for="lastName">Last Name:</label>
+              <input 
+                type="text" 
+                id="lastName" 
+                [(ngModel)]="lastName" 
+                placeholder="e.g., Doe"
+                class="form-input"
+                (keyup.enter)="searchCase()"
+              />
+            </div>
+            
+            <button class="btn btn-primary" (click)="searchCase()" [disabled]="!caseNumber.trim() || !lastName.trim()">
               Search Case
             </button>
           </div>

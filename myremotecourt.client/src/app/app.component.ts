@@ -23,6 +23,7 @@ export class AppComponent {
   title = 'myremotecourt.client';
   currentStep = 0;
   caseNumber = '';
+  lastName = '';
   caseData: CaseData | null = null;
   isEligible: boolean | null = null;
   caseConfirmed = false;
@@ -38,9 +39,9 @@ export class AppComponent {
     console.log('Step changed to:', stepIndex);
   }
 
-  // Step 1: Search for case by case/citation number
+  // Step 1: Search for case by case/citation number and last name
   searchCase(): void {
-    if (this.caseNumber.trim()) {
+    if (this.caseNumber.trim() && this.lastName.trim()) {
       // TODO: Call API to fetch case data
       // For now, simulate API response
       this.simulateCaseLookup();
@@ -81,6 +82,7 @@ export class AppComponent {
 
   resetSearch(): void {
     this.caseNumber = '';
+    this.lastName = '';
     this.caseData = null;
     this.caseConfirmed = false;
     this.isEligible = null;
