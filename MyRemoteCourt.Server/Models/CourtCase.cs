@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace MyRemoteCourt.Server.Models
 {
@@ -9,7 +10,11 @@ namespace MyRemoteCourt.Server.Models
         public string FirstName { get; set; } = string.Empty;
         public string LastName { get; set; } = string.Empty;
         public string? CaseType { get; set; }
-        public bool RemoteApproved { get; set; } = false;
+        
+        // Computed from RemoteRequest.Approved
+        [NotMapped] 
+        public bool RemoteApproved => RemoteRequest?.Approved == true;
+        
         public string AssignedCourtroom { get; set; } = string.Empty;
         public int? QueuePlacement { get; set; }
         

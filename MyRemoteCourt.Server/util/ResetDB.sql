@@ -15,7 +15,6 @@ CREATE TABLE dbo.CourtCase (
     FirstName VARCHAR(100) NOT NULL,
     LastName VARCHAR(100) NOT NULL,
     CaseType VARCHAR(50) NULL,
-    RemoteApproved BIT NOT NULL DEFAULT 0, 
     AssignedCourtroom VARCHAR(50) NOT NULL,
     QueuePlacement INT NULL
 );
@@ -43,15 +42,15 @@ GO
 -- Enable IDENTITY_INSERT to specify explicit ID values
 SET IDENTITY_INSERT dbo.CourtCase ON;
 
--- Insert sample cases 
-INSERT INTO dbo.CourtCase (Id, CaseNumber, FirstName, LastName, CaseType, RemoteApproved, AssignedCourtroom, QueuePlacement)
+-- Insert sample cases
+INSERT INTO dbo.CourtCase (Id, CaseNumber, FirstName, LastName, CaseType, AssignedCourtroom, QueuePlacement)
 VALUES 
-(1, 'CR-2023-001', 'John', 'Doe', 'Criminal', 0, 'Room 302', NULL), -- Test case 
-(2, 'CV-2023-045', 'Jane', 'Smith', 'Civil', 0, 'Room 101', NULL), -- Test case 
-(3, 'TR-2023-999', 'Robert', 'Brown', 'Traffic', 0, 'Room 200', NULL),
-(4, 'CR-2023-002', 'Maria', 'Garcia', 'Criminal', 0, 'Room 305', NULL),
-(5, 'CV-2023-046', 'Michael', 'Johnson', 'Civil', 1, 'Room 102', NULL),
-(6, 'TR-2024-001', 'Sarah', 'Williams', 'Traffic', 1, 'Room 201', NULL);
+(1, 'CR-2023-001', 'John', 'Doe', 'Criminal', 'Room 302', NULL), -- No remote request
+(2, 'CV-2023-045', 'Jane', 'Smith', 'Civil', 'Room 101', NULL), -- No remote request
+(3, 'TR-2023-999', 'Robert', 'Brown', 'Traffic', 'Room 200', NULL), -- Request denied
+(4, 'CR-2023-002', 'Maria', 'Garcia', 'Criminal', 'Room 305', NULL), -- Request denied
+(5, 'CV-2023-046', 'Michael', 'Johnson', 'Civil', 'Room 102', 2), -- Request approved
+(6, 'TR-2024-001', 'Sarah', 'Williams', 'Traffic', 'Room 201', 1); -- Request approved
 
 SET IDENTITY_INSERT dbo.CourtCase OFF;
 GO
@@ -62,7 +61,7 @@ SET IDENTITY_INSERT dbo.RemoteRequest ON;
 -- Insert sample requests linked to the cases above 
 INSERT INTO dbo.RemoteRequest (Id, CaseId, Approved, RequestDate)
 VALUES 
-(102, 3, 0, '2023-11-01 04:59:00'), -- Linked to Robert Brown - Pending
+(102, 3, 0, '2023-11-01 04:59:00'), -- Linked to Robert Brown - Denied
 (103, 4, 0, '2023-11-01 10:15:00'), -- Linked to Maria Garcia - Denied
 (104, 5, 1, '2023-11-02 15:45:00'), -- Linked to Michael Johnson - Approved
 (105, 6, 1, '2023-11-03 15:22:00'); -- Linked to Sarah Williams - Approved
@@ -95,14 +94,17 @@ SELECT 'RemoteRequest' AS TableName, COUNT(*) AS RecordCount FROM dbo.RemoteRequ
 
 PRINT '';
 PRINT '========================================';
-PRINT 'Cases with Remote Requests:';
+PRINT 'Cases with Remote Requests (with Computed RemoteApproved):';
 PRINT '========================================';
 SELECT 
     c.Id AS CaseId,
     c.CaseNumber,
     c.FirstName + ' ' + c.LastName AS FullName,
     c.CaseType,
-    c.RemoteApproved AS CaseRemoteApproved,
+    CASE 
+        WHEN r.Approved = 1 THEN 1 
+        ELSE 0 
+    END AS RemoteApproved, -- Computed: true only if RemoteRequest.Approved = 1
     c.AssignedCourtroom,
     c.QueuePlacement,
     r.Id AS RequestId,
