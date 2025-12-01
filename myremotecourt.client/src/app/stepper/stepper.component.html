@@ -20,17 +20,4 @@
   <div class="stepper-content">
     <ng-content></ng-content>
   </div>
-
-  <div class="stepper-actions">
-    <button class="btn btn-secondary"
-            (click)="previousStep()"
-            [disabled]="currentStep === 0">
-      Previous
-    </button>
-    <button class="btn btn-primary"
-            (click)="nextStep()"
-            [disabled]="currentStep === steps.length - 1">
-      Next
-    </button>
-  </div>
 </div>

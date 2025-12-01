@@ -65,6 +65,7 @@
             <button class="btn btn-primary" (click)="searchCase()" [disabled]="!caseNumber.trim() || !lastName.trim()">
               Search Case
             </button>
+            <span *ngIf="errorMessage" class="error-message">{{ errorMessage }}</span>
           </div>
 
           <!-- Step 2: Verify Case Details -->

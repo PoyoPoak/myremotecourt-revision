@@ -26,6 +26,7 @@ export class AppComponent {
   caseData: CaseData | null = null;
   isEligible: boolean | null = null;
   caseConfirmed = false;
+  errorMessage = '';
 
   steps: Step[] = [
     { label: 'Enter Case Number', completed: false },
@@ -62,9 +63,9 @@ export class AppComponent {
         error: (err) => { // Err handling
           console.error('Error fetching case data:', err);
           if (err.status === 404) { // Not found
-            alert('Err:404 Case not found. Please check the case number and last name.');
+            this.errorMessage = 'Case Not Found';
           } else { // Anything else, generalizing for MVP
-            alert('An error occurred while fetching case data. Please try again later.');
+            alert('Unexpected Error');
           }
         }
       });
@@ -92,6 +93,7 @@ export class AppComponent {
     this.isEligible = null;
     this.currentStep = 0;
     this.steps.forEach(step => step.completed = false);
+    this.errorMessage = '';
   }
 
   // Step 3: Check eligibility based on hearing type

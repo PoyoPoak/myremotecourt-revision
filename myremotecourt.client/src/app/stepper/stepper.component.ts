@@ -49,4 +49,8 @@ export class StepperComponent {
     // Allow navigation to previous steps or next step if current is completed
     return index <= this.currentStep || this.isStepCompleted(this.currentStep);
   }
+
+  isNextDisabled(): boolean {
+    return this.currentStep === this.steps.length - 1 || !this.isStepCompleted(this.currentStep);
+  }
 }
