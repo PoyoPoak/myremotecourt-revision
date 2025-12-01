@@ -49,10 +49,10 @@ SET IDENTITY_INSERT dbo.CourtCase ON;
 INSERT INTO dbo.CourtCase (Id, CaseNumber, FirstName, LastName, CaseType, AssignedCourtroom, QueuePlacement, HearingType, HearingDate, Location)
 VALUES 
 (1, 'CR-3498-001', 'John', 'Doe', 'Criminal', 'Room 302', NULL, 'Preliminary Hearing', '2025-02-10', 'Orange County Justice Center'),
-(2, 'CV-4722-045', 'Jane', 'Smith', 'Civil', 'Room 101', NULL, 'Motion Hearing', '2025-02-12', 'Orange County Justice Center'),
-(3, 'TR-3497-999', 'Robert', 'Brown', 'Traffic', 'Room 200', NULL, 'Traffic Arraignment', '2025-02-15', 'Orange County Justice Center'),
-(4, 'CR-0923-002', 'Maria', 'Garcia', 'Criminal', 'Room 305', NULL, 'Court Trial', '2025-02-18', 'Orange County Justice Center'),
-(5, 'CV-1120-046', 'Michael', 'Johnson', 'Civil', 'Room 102', 2, 'Traffic Arraignment', '2025-02-20', 'Orange County Justice Center'),
+(2, 'CV-4722-045', 'Jane', 'Smith', 'Civil', 'Room 101', NULL, 'Motion Hearing', '2025-02-12', 'West Justice Center'),
+(3, 'TR-3497-999', 'Robert', 'Brown', 'Traffic', 'Room 200', NULL, 'Traffic Arraignment', '2025-02-15', 'Central Justice Center'),
+(4, 'CR-0923-002', 'Maria', 'Garcia', 'Criminal', 'Room 305', NULL, 'Court Trial', '2025-02-18', 'North Justice Center'),
+(5, 'CV-1120-046', 'Michael', 'Johnson', 'Civil', 'Room 102', 2, 'Traffic Arraignment', '2025-02-20', 'North County Justice Center'),
 (6, 'TR-9238-001', 'Sarah', 'Williams', 'Traffic', 'Room 201', 1, 'Traffic Arraignment', '2025-02-22', 'Orange County Justice Center');
 
 SET IDENTITY_INSERT dbo.CourtCase OFF;
@@ -64,7 +64,6 @@ SET IDENTITY_INSERT dbo.RemoteRequest ON;
 -- Insert sample requests linked to the cases above 
 INSERT INTO dbo.RemoteRequest (Id, CaseId, Approved, RequestDate)
 VALUES 
-(102, 3, 0, '2023-11-01 04:59:00'), -- Linked to Robert Brown - Denied
 (103, 4, 0, '2023-11-01 10:15:00'), -- Linked to Maria Garcia - Denied
 (104, 5, 1, '2023-11-02 15:45:00'), -- Linked to Michael Johnson - Approved
 (105, 6, 1, '2023-11-03 15:22:00'); -- Linked to Sarah Williams - Approved

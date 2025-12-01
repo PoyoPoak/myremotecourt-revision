@@ -125,7 +125,7 @@
   .btn:disabled {
     opacity: 0.5;
     cursor: not-allowed;
-  }
+  }@import url('stepper.component.css');
 
 .btn-primary {
   background-color: #1976d2;

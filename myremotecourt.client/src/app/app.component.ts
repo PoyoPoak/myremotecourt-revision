@@ -100,9 +100,7 @@ export class AppComponent {
   checkEligibility(): void {
     if (this.caseData) {
       // Determine eligibility based on hearing type
-      // Traffic Arraignment = Eligible
-      // Court Trial = Ineligible
-      this.isEligible = this.caseData.hearingType.toLowerCase().includes('arraignment');
+      this.isEligible = this.caseData.hearingType.toLowerCase().includes('traffic');
       this.steps[2].completed = true;
     }
   }

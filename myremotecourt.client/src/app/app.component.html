@@ -131,7 +131,7 @@
                   ensuring you can participate fully in your court proceedings.
                 </p>
               </div>
-              <button class="btn btn-primary btn-lg" (click)="requestRemoteAppearance()">
+              <button class="btn btn-primary" (click)="requestRemoteAppearance()">
                 Request Remote Appearance
               </button>
             </div>
@@ -151,15 +151,15 @@
                   For this type of hearing, you must appear physically at the court location.
                 </p>
                 <p>
-                  Court trials require in-person attendance to ensure proper confrontation rights and 
-                  the presentation of evidence. You must appear at the {{ caseData?.location }} on your 
+                  Court trials require in-person attendance to ensure proper confrontation rights and
+                  the presentation of evidence. You must appear at the <strong>{{ caseData?.location }}</strong> on your
                   scheduled hearing date: <strong>{{ caseData?.hearingDate }}</strong>.
                 </p>
                 <p>
                   Please arrive at least 30 minutes early and bring a valid photo ID.
                 </p>
               </div>
-              <button class="btn btn-primary btn-lg" (click)="getDirections()">
+              <button class="btn btn-primary" (click)="getDirections()">
                 Get Directions
               </button>
               <button class="btn btn-secondary" (click)="resetSearch()" style="margin-left: 1rem;">
