@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Step } from './stepper/stepper.component';
+import { CourtCaseResponse, CourtCaseService } from './services/court-cases.service';
 
 interface CaseData {
   caseNumber: string;
@@ -37,30 +38,37 @@ export class AppComponent {
     console.log('Step changed to:', stepIndex);
   }
 
+  // Initialize CourtCaseService and inject it
+  constructor(private courtCaseService: CourtCaseService) { }
+
   // Step 1: Search for case by case/citation number and last name
   searchCase(): void {
+    // Ensure case number and last name are provided
     if (this.caseNumber.trim() && this.lastName.trim()) {
-      // TODO: Call API to fetch case data
-      // For now, simulate API response
-      this.simulateCaseLookup();
+      // Call the backend API to fetch case details
+      this.courtCaseService.getCaseByCaseNumber(this.caseNumber, this.lastName).subscribe({
+        next: (response: CourtCaseResponse) => { // Handle successful response
+          this.caseData = { // Map response to CaseData interface
+            caseNumber: response.caseNumber,
+            fullName: response.fullName,
+            caseType: response.caseType || 'N/A',
+            hearingType: response.hearingType || 'N/A',
+            hearingDate: response.hearingDate || 'N/A',
+            location: response.location || 'N/A'
+          };
+          this.steps[0].completed = true; // Mark step 1 as completed
+          this.currentStep = 1; // Move to confirmation step
+        },
+        error: (err) => { // Err handling
+          console.error('Error fetching case data:', err);
+          if (err.status === 404) { // Not found
+            alert('Err:404 Case not found. Please check the case number and last name.');
+          } else { // Anything else, generalizing for MVP
+            alert('An error occurred while fetching case data. Please try again later.');
+          }
+        }
+      });
     }
-  }
-
-  simulateCaseLookup(): void {
-    // Simulate API call - replace with actual API call later
-    setTimeout(() => {
-      // Mock case data
-      this.caseData = {
-        caseNumber: this.caseNumber,
-        fullName: 'John Doe',
-        caseType: 'Traffic',
-        hearingType: 'Traffic Arraignment',
-        hearingDate: '2025-02-15',
-        location: 'Orange County Justice Center'
-      };
-      this.steps[0].completed = true;
-      this.currentStep = 1;
-    }, 500);
   }
 
   // Step 2: Confirm case details

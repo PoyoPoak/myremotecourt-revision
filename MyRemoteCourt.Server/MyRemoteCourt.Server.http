@@ -1,6 +1,6 @@
 @MyRemoteCourt.Server_HostAddress = http://localhost:5245
 
-GET {{MyRemoteCourt.Server_HostAddress}}/weatherforecast/
+GET {{MyRemoteCourt.Server_HostAddress}}
 Accept: application/json
 
 ###

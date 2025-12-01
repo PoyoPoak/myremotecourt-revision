@@ -21,7 +21,7 @@ namespace MyRemoteCourt.Server.Controllers
         // GET: api/courtcases/{caseNumber}
         // Returns a court case with computed RemoteApproved status
         [HttpGet("{caseNumber}")]
-        public async Task<ActionResult<CourtCase>> GetCasebyCaseNumber(string caseNumber, [FromQuery]
+        public async Task<ActionResult<CourtCase>> GetCasebyCaseNumber(string caseNumber, [FromQuery] string? lastName)
         {
             // IMPORTANT: Must include RemoteRequest for RemoteApproved to compute correctly
             var courtCase = await _dbManager.CourtCase
@@ -35,8 +35,8 @@ namespace MyRemoteCourt.Server.Controllers
             }
 
             // Check last name parameter
-            if (!HttpContext.Request.Query.TryGetValue("lastName", out var lastName) ||
-                !string.Equals(courtCase.LastName, lastName.ToString(), StringComparison.OrdinalIgnoreCase))
+            if (!string.IsNullOrWhiteSpace(lastName) &&
+                !courtCase.LastName.Equals(lastName, StringComparison.OrdinalIgnoreCase))
             {
                 return Unauthorized(new { message = "Last name does not match our records." });
             }
